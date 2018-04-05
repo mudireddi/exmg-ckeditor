@@ -58,7 +58,7 @@ Paper style ckeditor input type
       disabled$="[[disabled]]"
       invalid="[[invalid]]">
 
-      <content select="[prefix]"></content>
+      <slot select="[prefix]"></slot>
 
       <label hidden$="[[!label]]" aria-hidden="true">[[label]]</label>
       <input is="iron-input"
@@ -100,7 +100,7 @@ Paper style ckeditor input type
         </textarea>
       </form>
 
-      <content select="[suffix]"></content>
+      <slot select="[suffix]"></slot>
 
       <!--template is="dom-if" if="[[errorMessage]]">
         <paper-input-error aria-live="assertive">[[errorMessage]]</paper-input-error>
@@ -113,7 +113,7 @@ Paper style ckeditor input type
     </paper-input-container>
 
     <div hidden$="[[!inline]]" id="inlineEditor" contenteditable="true">
-        {{value}}
+      {{value}}
     </div>
   </template>
 
@@ -178,17 +178,17 @@ Paper style ckeditor input type
         this.destroyEditor();
       },
       _observeReady(_editorReady) {
-        if(_editorReady) {
+        if (_editorReady) {
           this.fire('editor-ready', this.editor);
         }
       },
       _observeValue(value, _editorReady) {
-        if(_editorReady && this._editor.getData() !== value) {
+        if (_editorReady && this._editor.getData() !== value) {
           this._editor.setData(value);
         }
       },
       _observeConfig() {
-        if(!this._editorReady) {
+        if (!this._editorReady) {
           return;
         }
         this.destroyEditor();
@@ -204,10 +204,12 @@ Paper style ckeditor input type
         if (typeof config === 'string') {
           config = JSON.parse(config);
         }
-        config.width = width;
-        config.height = height;
-        config.autoParagraph = false;
-        this.set('config', JSON.stringify(config));
+        if (config) {
+          config.width = width;
+          config.height = height;
+          config.autoParagraph = false;
+          this.set('config', JSON.stringify(config));
+        }
       },
       /**
        * Initialize editor to replace textarea. Please note that this method will automaticly be called uppon load.
