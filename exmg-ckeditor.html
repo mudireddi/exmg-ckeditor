@@ -58,7 +58,7 @@ Paper style ckeditor input type
       disabled$="[[disabled]]"
       invalid="[[invalid]]">
 
-      <slot select="[prefix]"></slot>
+      <slot name="[prefix]"></slot>
 
       <label hidden$="[[!label]]" aria-hidden="true">[[label]]</label>
       <input is="iron-input"
@@ -100,7 +100,7 @@ Paper style ckeditor input type
         </textarea>
       </form>
 
-      <slot select="[suffix]"></slot>
+      <slot name="[suffix]"></slot>
 
       <!--template is="dom-if" if="[[errorMessage]]">
         <paper-input-error aria-live="assertive">[[errorMessage]]</paper-input-error>
